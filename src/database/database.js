@@ -1,5 +1,6 @@
-import { connect } from "mongoose";
+import { connect } from 'mongoose';
+import 'dotenv/config';
 
-connect(process.env.MONGODB_URI, {dbName: "todo-list"})
-    .then(() => console.log("Connected to the DB"))
-    .catch((error) => console.log("Error to connect to DB"))
+connect(process.env.MONGODB_URI, {dbName: 'catalog-app-db'})
+.then(() => console.log('Connected to DB'))
+.catch(err => console.log('Error connecting to DB', err));

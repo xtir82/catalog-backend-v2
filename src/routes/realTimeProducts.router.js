@@ -1,6 +1,6 @@
 import { Router } from "express";
 import { productManager } from "./product.router.js";
-import { __dirname } from "../utils.js";
+import { __dirname } from "../utility.js";
 import { socketServer } from "../app.js";
 
 

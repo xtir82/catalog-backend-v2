@@ -1,12 +1,13 @@
 import { Router } from "express";
 import CartManager from "../controller/cartManager.js";
-import { __dirname } from "../utils.js";
+import { __dirname } from "../utility.js";
 
 const router = Router();
 
 const cartManager = new CartManager(__dirname + '/data/cart.json');
 
 //Rutas
+//router.get('/', productController.getProduct)
 router.get('/', async (req,res) => {
     try {
         const respuesta = await cartManager.getCarts();

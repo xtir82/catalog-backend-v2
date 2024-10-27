@@ -2,14 +2,15 @@ import { Schema, model } from "mongoose";
 
 //Creamos el esquema del Documento de MongoDB
 const productSchema = new Schema({ 
-    title: String,
-    description: String,
-    code: Number,
-    price: Number,
-    status: Boolean,
-    stock: Number, 
-    category: String
+    title: {type: String},
+    description: {type: String},
+    code: {type: Number},
+    price: {type: Number},
+    status: {type: Boolean},
+    stock: {type: Number}, 
+    category: {type: String}
     })
 
 //Se crea un modelo basado en el esquema creado anteriormente
-export const ProductModel = model('productos', productSchema);
+const ProductModel = model('products', productSchema);
+export default ProductModel
