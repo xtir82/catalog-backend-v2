@@ -9,22 +9,25 @@ import session from "express-session";
 import FileStore from 'session-file-store';
 import MongoStore from 'connect-mongo';
 import * as path from 'node:path';
-import { engine } from "express-handlebars";
-import "./src/database/database.js";
+import DB from "./src/database/database.js"
 import passport from "passport";
 import initializePassport from "./src/config/passport.config.js";
+import Handlebars from "handlebars";
+import ProductModel from "./src/model/product.model.js";
 
 //Routes
 import CartRoute from './src/routes/cart.router.js';
-import ProductRoute, { productManager } from './src/routes/product.router.js';
+import ProductRoute from './src/routes/product.router.js';
 
-import Home from './src/routes/home.router.js'
-import RealTimeProducts from './src/routes/realtimeproducts.router.js';
+import RealTimeProducts from './src/routes/realTimeProducts.router.js';
 import mongoose from "mongoose";
 
-import CookieRouter from './src/routes/cookies.router.js';
+//import CookieRouter from './src/routes/cookies.router.js';
 import SessionRouter from './src/routes/session.router.js';
 import ViewsRouter from './src/routes/views.router.js';
+
+//Singleton
+const DBinstance = DB;
 
 const app = express();
 const port = process.env.PORT;
@@ -33,9 +36,15 @@ const port = process.env.PORT;
 const fileStore = new FileStore(session);
 
 //Template Engine
-app.engine('handlebars', handlebars.engine()); //Inicializamos el template engine, en este caso handlebars
+const enginehandlebars = Handlebars.create({
+    allowProtoPropertiesByDefault: true,
+    allowProtoMethodsByDefault: true 
+})
+
+app.engine('handlebars', handlebars.engine({handlebars: enginehandlebars})); //Inicializamos el template engine, en este caso handlebars
 app.set("views", path.join(__dirname, 'views')); //Configuramos la ruta de las views
 app.set('view engine', 'handlebars');
+
 
 //Middleware
 app.use(express.json()); //body-parse
@@ -66,11 +75,10 @@ app.use(passport.initialize());
 app.use(passport.session());
 
 //Router
-app.use('/api/product',  ProductRoute);
+app.use('/api/product', ProductRoute);
 app.use('/api/cart',  CartRoute);
-app.use('/home',  Home);
 app.use('/realtimeproducts', RealTimeProducts);
-app.use('/api/cookie', CookieRouter);
+//app.use('/api/cookie', CookieRouter);
 app.use('/api/session', SessionRouter);
 app.use('/', ViewsRouter);
 
@@ -84,7 +92,7 @@ export const socketServer = new Server(httpServer);
 socketServer.on('connection', async (socket) => {
     console.log('New user connected');
 
-    const realtimeDB = await productManager.getProducts();
+    const realtimeDB = await ProductModel.find();;
     socketServer.emit('socketDB', realtimeDB);
     
     //Recibimos la data del producto *1

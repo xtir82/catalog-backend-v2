@@ -2,15 +2,16 @@
     <h1>Lista de Productos</h1>
 </div>
 <div class="container-fluid d-flex justify-content-around">
-    {{#each productos}}
+
+    {{#each productos }}
         <div class="card" style="width: 18rem;">
             <img src="..." class="card-img-top" alt="...">
             <div class="card-body">
-                <h3 class="card-title">{{this.title}}</h5>
-                <p class="card-text">Descripcion: {{this.description}}</p>
-                <p class="card-text">Categoria: {{this.category}}</p>
-                <p class="card-text">Inventario: {{this.stock}}</p>
-                <p class="card-text">Precio: {{this.price}}</p>
+                <h3 id="title" class="card-title">{{title}}</h3>
+                <p class="card-text">Descripcion: {{description}}</p>
+                <p class="card-text">Categoria: {{category}}</p>
+                <p class="card-text">Inventario: {{stock}}</p>
+                <p class="card-text">Precio: {{price}}</p>
                 <!-- <a href="#" class="btn btn-primary">Go somewhere</a> -->
             </div>
         </div>

@@ -1,6 +1,9 @@
 import {Router} from 'express';
+import { productManager } from './product.router.js';
 
 const router = Router();
+
+router.get('/home', productManager.renderProduct);
 
 router.get('/register', (req, res) => {
     if (req.session.login) {

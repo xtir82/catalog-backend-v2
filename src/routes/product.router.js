@@ -1,13 +1,19 @@
 import { Router } from "express";
-import ProductManager from "../controller/productManager.js";
 import { __dirname } from "../utility.js";
+import ProductManager from "../controller/productManager.js";
 
 const router = Router();
 
-export const productManager = new ProductManager(__dirname + '/data/product.json');
+export const productManager = new ProductManager();
 
 //Rutas
-router.get('/', async (req,res) => {
+router.get('/', productManager.getProduct);
+router.get('/:productId', productManager.getProductById);
+router.post('/', productManager.postProduct);
+router.delete('/:productId', productManager.deleteProduct);
+router.put('/:productId', productManager.deleteProduct);
+
+/*router.get('/', async (req,res) => {
     try {
         const respuesta = await productManager.getProducts();
         res.status(200).json({
@@ -17,9 +23,9 @@ router.get('/', async (req,res) => {
     } catch(error) {
         res.status(404).send('Ops! hay un problema: ' + error);
     }
-})
+})*/
 
-router.get('/:productId', async (req, res) => {
+/*router.get('/:productId', async (req, res) => {
     try {
         const productId = parseInt(req.params.productId); //Convertimos el queryparams de string a number
         const productFound = await productManager.getProductById(productId);
@@ -31,9 +37,9 @@ router.get('/:productId', async (req, res) => {
     } catch(error) {
         res.status(404).send('Ops! hay un problema: ' + error);
     }
-})
+})*/
 
-router.post('/', async (req,res) => {
+/*router.post('/', async (req,res) => {
     try {
         const productToAdd = req.body;
         await productManager.addProduct(productToAdd);
@@ -43,9 +49,9 @@ router.post('/', async (req,res) => {
     } catch(error) {
         res.status(404).send('Ops! hay un problema: ' + error);
     }
-})
+})*/
 
-router.put('/:productId', async (req, res) => {
+/*router.put('/:productId', async (req, res) => {
     try {
         const productToEdit = parseInt(req.params.productId);
         const productReplacement = {
@@ -66,9 +72,9 @@ router.put('/:productId', async (req, res) => {
     } catch(error) {
         res.status(404).send('Ops! hay un problema: ' + error);
     }
-})
+})*/
 
-router.delete('/:productId', async (req, res) => {
+/*router.delete('/:productId', async (req, res) => {
     try {
         const productToDelete = parseInt(req.params.productId);
         await productManager.deleteProduct(productToDelete);
@@ -79,6 +85,6 @@ router.delete('/:productId', async (req, res) => {
     } catch(error) {
         res.status(404).send('Ops! hay un problema: ' + error);
     }
-})
+})*/
 
 export default router;
