@@ -18,9 +18,7 @@ import ProductModel from "./src/model/product.model.js";
 //Routes
 import CartRoute from './src/routes/cart.router.js';
 import ProductRoute from './src/routes/product.router.js';
-
 import RealTimeProducts from './src/routes/realTimeProducts.router.js';
-import mongoose from "mongoose";
 
 //import CookieRouter from './src/routes/cookies.router.js';
 import SessionRouter from './src/routes/session.router.js';
@@ -92,14 +90,14 @@ export const socketServer = new Server(httpServer);
 socketServer.on('connection', async (socket) => {
     console.log('New user connected');
 
-    const realtimeDB = await ProductModel.find();;
+    const realtimeDB = await ProductModel.find();
     socketServer.emit('socketDB', realtimeDB);
     
-    //Recibimos la data del producto *1
-    socket.on('newProduct', (data) => {
-        realtimeDB.push(data);
-
+    //Funcion para registrar un nuevo producto
+    socket.on('newProduct', async (data) => {
+        await ProductModel.create(data);
+        const realtimeDB = await ProductModel.find();
         //Emitimos al servidor la base de datos
         socketServer.emit('socketDB', realtimeDB);
-    })    
+    }) 
 } );

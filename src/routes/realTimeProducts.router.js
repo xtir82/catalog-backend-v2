@@ -5,8 +5,8 @@ import { socketServer } from "../../app.js";
 const router = Router();
 
 //Rutas
-router.get('/', async (req,res) => {
-    /*try {
+/*router.get('/', async (req,res) => {
+    try {
         const respuesta = await cartManager.getCarts();
         res.status(200).json({
             mensaje:'Lista de Carritos Obtenida',
@@ -18,9 +18,9 @@ router.get('/', async (req,res) => {
    //const {obj} = req.query; //Destructuramos
     res.render('realtimeproducts', {
         productos: [],
-    }) //Renderiza la vista*/
+    }) //Renderiza la vista
     res.render( 'realtimeproducts', {} )
-})
+})*/
 
 /*router.get('/', async (req,res) => {
     try {

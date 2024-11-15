@@ -4,7 +4,7 @@ import ProductModel from '../model/product.model.js';
 import { answer } from '../utils/reuse.js';
 
 class ProductManager {
-    constructor(path) {
+    /*constructor(path) {
         this.path = path;
         this.dbProduct = [];
         this.idProduct = 0;
@@ -23,7 +23,7 @@ class ProductManager {
             active: true
         }
         return newProduct
-    }
+    }*/
 
     async getProduct (req, res) {
         try {
@@ -56,12 +56,20 @@ class ProductManager {
         }
     }
 
-    async renderProduct (req, res) {
+    async renderHome (req, res) {
         try {
             const productos = await ProductModel.find().lean();
             console.log(productos);
             //answer(res, 200, products);
             res.render('home', {productos});
+        } catch {
+            answer(res, 500, "Error al obtener los productos")
+        }
+    }
+
+    async renderRealTime(req, res) {
+        try {
+            res.render('realtimeproducts', {});
         } catch {
             answer(res, 500, "Error al obtener los productos")
         }

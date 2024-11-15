@@ -48,7 +48,7 @@ newProdBtn.addEventListener('click', (event) => {
             stockInput = popup.querySelector('#stock');
             categoryInput = popup.querySelector('#category');
 
-            //Shorcu para que se presione Confirmar al presionar 'Enter'
+            //Shortcut para que se presione Confirmar al presionar 'Enter'
             titleInput.onkeyup = (event) => event.key === 'Enter' && Swal.clickConfirm();
             descriptionInput.onkeyup = (event) => event.key === 'Enter' && Swal.clickConfirm();
             codeInput.onkeyup = (event) => event.key === 'Enter' && Swal.clickConfirm();
@@ -65,7 +65,7 @@ newProdBtn.addEventListener('click', (event) => {
             const status = document.querySelector('#status').value;
             const stock = document.querySelector('#stock').value;
             const category = document.querySelector('#category').value;
-            if (!title || !description || !code || !price || !price || !stock || !category ) {
+            if (!title || !description || !code || !price || !status || !stock || !category ) {
               Swal.showValidationMessage(`Por favor complete todos los campos`);
             }
             return { title, description, code, price, status, stock, category };
@@ -75,6 +75,7 @@ newProdBtn.addEventListener('click', (event) => {
         
         //Emitimos la data del producto *1
         product = result.value;
+        console.log(product)
         socket.emit('newProduct', product);
 
         })

@@ -1,1 +1,26 @@
-{"data":[{"id":"8d7f64a8-d0bb-4def-b055-47ddb2f9a663","title":"Pizza Congelada","description":"Pizza Margarita para microondas","code":18293829,"price":3,"status":true,"stock":50,"category":"Food"},{"id":"691bf850-a9e6-44cc-9402-8dd9a70e53a4","title":"Pollo Frito","description":"Pollo frito para freidora de aire","code":123465,"price":3,"status":true,"stock":40,"category":"Food","thumbnails":"","active":true}]}
+{
+  "data": [
+    {
+      "id": "8d7f64a8-d0bb-4def-b055-47ddb2f9a663",
+      "title": "Pizza Congelada",
+      "description": "Pizza Margarita para microondas",
+      "code": 18293829,
+      "price": 3,
+      "status": true,
+      "stock": 50,
+      "category": "Food"
+    },
+    {
+      "id": "691bf850-a9e6-44cc-9402-8dd9a70e53a4",
+      "title": "Pollo Frito",
+      "description": "Pollo frito para freidora de aire",
+      "code": 123465,
+      "price": 3,
+      "status": true,
+      "stock": 40,
+      "category": "Food",
+      "thumbnails": "",
+      "active": true
+    }
+  ]
+}

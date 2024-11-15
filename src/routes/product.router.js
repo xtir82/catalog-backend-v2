@@ -13,6 +13,8 @@ router.post('/', productManager.postProduct);
 router.delete('/:productId', productManager.deleteProduct);
 router.put('/:productId', productManager.deleteProduct);
 
+export default router;
+
 /*router.get('/', async (req,res) => {
     try {
         const respuesta = await productManager.getProducts();
@@ -87,4 +89,3 @@ router.put('/:productId', productManager.deleteProduct);
     }
 })*/
 
-export default router;
