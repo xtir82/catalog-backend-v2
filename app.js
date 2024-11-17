@@ -40,7 +40,7 @@ const enginehandlebars = Handlebars.create({
 })
 
 app.engine('handlebars', handlebars.engine({handlebars: enginehandlebars})); //Inicializamos el template engine, en este caso handlebars
-app.set("views", path.join(__dirname, 'views')); //Configuramos la ruta de las views
+app.set("views", /*path.join(__dirname, */'./src/views'); //Configuramos la ruta de las views
 app.set('view engine', 'handlebars');
 
 
@@ -75,9 +75,10 @@ app.use(passport.session());
 //Router
 app.use('/api/product', ProductRoute);
 app.use('/api/cart',  CartRoute);
+app.use('/api/session', SessionRouter);
+
 app.use('/realtimeproducts', RealTimeProducts);
 //app.use('/api/cookie', CookieRouter);
-app.use('/api/session', SessionRouter);
 app.use('/', ViewsRouter);
 
 //Creamos la variable httpServer y instanciamos para que funcione con sockets

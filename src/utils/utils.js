@@ -1,8 +1,8 @@
 //Bcrypt
-import bcrypt, {hash} from 'bcrypt';
+import {genSaltSync, hashSync, compareSync} from 'bcrypt';
 
 const createHash = (password) => {
-    return bcrypt.hashSync(password, bcrypt.genSaltSync(10), null);
+    return hashSync(password, genSaltSync(10), null);
 }
 
 //hashSync -> Apply a hash process to password from a salt
@@ -10,7 +10,7 @@ const createHash = (password) => {
 //genSaltSync -> Generates a 10 char salt
 
 const isValidPassword = (password, user) => {
-    bcrypt.compareSync(password, bcrypt.genSaltSync(10), user.password);
+    return compareSync(password, user.password);
 }
 //compareSync -> Compare the passwords
 

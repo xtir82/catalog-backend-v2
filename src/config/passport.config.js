@@ -1,16 +1,34 @@
 import passport from 'passport';
 import local from 'passport-local';
-import UserModel from "../model/user.model.js";
 import { createHash, isValidPassword } from "../utils/utils.js";
-import userModel from "../model/user.model.js";
-import GitHubStrategy from "passport-github2";
+import UserModel from "../model/user.model.js";
+import jwt from 'passport-jwt';
+import "dotenv/config";
 
+import GitHubStrategy from "passport-github2";
 import GoogleStrategy from "passport-google-oauth20";
 
-const LocalStrategy = local.Strategy;
+/*const LocalStrategy = local.Strategy;*/
+
+const JwtStrategy = jwt.Strategy;
+const ExtractJwt = jwt.ExtractJwt;
 
 const initializePassport = () => {
-    passport.use('register', new LocalStrategy({
+
+    passport.use("jwt", new JwtStrategy ({
+        jwtFromRequest: ExtractJwt.fromExtractors([cookieExtractor]),
+        secretOrKey: process.env.JWT_SECRET,
+    }, async (jwt_payload, done) => {
+        try {
+            return done(null, jwt_payload);
+        } catch (error) {
+            return done(error);
+        }
+    }))
+
+
+
+    /*passport.use('register', new LocalStrategy({
         passReqToCallback: true,
         //Le indicamos al sistema que queremos acceder al objeto resquest
         usernameField: 'email'
@@ -30,9 +48,11 @@ const initializePassport = () => {
         } catch(error) {
             return done(error);
         }
-    }));
+    }));*/
 
-    passport.use('login', new LocalStrategy({
+
+
+    /*passport.use('login', new LocalStrategy({
         usernameField: 'email',
     }, async (email, password, done) => {
         try {
@@ -51,7 +71,7 @@ const initializePassport = () => {
         } catch (e) {
             return done(e);
         }
-    }))
+    }))*/
 
     passport.serializeUser((user, done) => {
         done(null, user._id);
@@ -114,6 +134,14 @@ const initializePassport = () => {
             return done(error);
         }
     }))
+}
+
+const cookieExtractor = (req) => {
+    let token = null;
+    if (req && req.cookies) {
+        token = req.cookies["catalogCookieToken"];   
+    }
+    return token;
 }
 
 export default initializePassport;
