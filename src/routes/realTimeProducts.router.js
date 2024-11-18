@@ -1,10 +1,12 @@
 import { Router } from "express";
 import { __dirname } from "../utility.js";
-import { socketServer } from "../../app.js";
+import { productManager } from "./product.router.js";
 
 const router = Router();
 
 //Rutas
+router.post("/", productManager.postRealTime);
+
 /*router.get('/', async (req,res) => {
     try {
         const respuesta = await cartManager.getCarts();
@@ -41,7 +43,7 @@ const router = Router();
         })
 })*/
 
-router.post('/', async (req,res) => {
+/*router.post('/', async (req,res) => {
     //aca se debe emitir
     socketServer.emit();
     
@@ -54,6 +56,6 @@ router.post('/', async (req,res) => {
     } catch(error) {
         res.status(404).send('Ops! hay un problema: ' + error);
     }
-})
+})*/
 
 export default router;

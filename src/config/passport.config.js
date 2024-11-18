@@ -26,8 +26,6 @@ const initializePassport = () => {
         }
     }))
 
-
-
     /*passport.use('register', new LocalStrategy({
         passReqToCallback: true,
         //Le indicamos al sistema que queremos acceder al objeto resquest
@@ -50,8 +48,6 @@ const initializePassport = () => {
         }
     }));*/
 
-
-
     /*passport.use('login', new LocalStrategy({
         usernameField: 'email',
     }, async (email, password, done) => {
@@ -66,8 +62,6 @@ const initializePassport = () => {
                 return done(null, false);
             }
             return done(null, user);
-
-
         } catch (e) {
             return done(e);
         }
@@ -78,7 +72,7 @@ const initializePassport = () => {
     })
 
     passport.deserializeUser(async (id, done) => {
-        let user = await userModel.findById({_id: id});
+        let user = await UserModel.findById({_id: id});
         done(null, user);
     })
 
@@ -139,7 +133,7 @@ const initializePassport = () => {
 const cookieExtractor = (req) => {
     let token = null;
     if (req && req.cookies) {
-        token = req.cookies["catalogCookieToken"];   
+        token = req.cookies["catalogCookieToken"];  
     }
     return token;
 }

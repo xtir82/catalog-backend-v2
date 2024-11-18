@@ -5,7 +5,7 @@ import { createHash, isValidPassword } from "../utils/utils.js";
 class SessionController {
   //Register
   async jwtRegister(req, res) {
-    const { first_name, last_name, age, email, password } = req.body;
+    const { first_name, last_name, age, email, role, password } = req.body;
     const user = await UserModel.findOne({ email });
 
     if (user) {
@@ -15,18 +15,23 @@ class SessionController {
         first_name: first_name,
         last_name: last_name,
         age: age,
+        role: role,
         email: email,
         password: createHash(password),
       });
 
       const savedUser = await newUser.save();
 
-      const token = generateToken(newUser);
+      //Aca tambien podemos usar newUser para probar
+      const token = generateToken(savedUser);
 
       res.cookie("catalogCookieToken", token, {
         maxAge: 3600000,
         httpOnly: true,
       });
+
+      req.session.user = req.user;
+      req.session.login = true;
 
       res.redirect("/api/session/current");
     }
@@ -40,15 +45,19 @@ class SessionController {
       const user = await UserModel.findOne({ email });
 
       if (!user) {
-        return res.status(401).json({ email: "El usuario no está registrado" });
+        return res.status(401).json({ email: "Informacion no valida" });
       }
 
       if (isValidPassword(password, user)) {
         const token = generateToken(user);
+
         res.cookie("catalogCookieToken", token, {
           maxAge: 3600000,
           httpOnly: true,
         });
+
+        req.session.user = user;
+        req.session.login = true;
 
         res.redirect("/api/session/current");
       } else {
@@ -59,7 +68,7 @@ class SessionController {
     }
   }
 
-  //Logout
+  //Logout/*
   async Logout(req, res) {
     res.clearCookie("catalogCookieToken");
     res.redirect("/login");
@@ -67,7 +76,10 @@ class SessionController {
 
   //Current
   async jwtCurrent(req, res) {
-    res.render("home", {usuario: req.user.first_name});
+    console.log(req.user);
+    console.log(req.session);
+    req.session.login = true;
+    res.redirect("/profile");
   }
 
   //Views

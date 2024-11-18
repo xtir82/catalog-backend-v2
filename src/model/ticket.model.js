@@ -11,4 +11,4 @@ const ticketSchema = new Schema({
 })
 
 const TicketModel = model("tickets", ticketSchema);
-export default UserModel;
+export default TicketModel;

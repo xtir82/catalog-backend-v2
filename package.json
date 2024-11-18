@@ -3,11 +3,11 @@
   "version": "2.0.0",
   "description": "",
   "type": "module",
-  "main": "app.js",
+  "main": "./app.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "dev": "nodemon ./src/app.js --mode dev",
-    "prod": "node ./src/app.js --mode production"
+    "dev": "nodemon ./app.js --mode dev",
+    "prod": "node ./app.js --mode production"
   },
   "private": true,
   "keywords": [],

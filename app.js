@@ -39,9 +39,9 @@ const enginehandlebars = Handlebars.create({
     allowProtoMethodsByDefault: true 
 })
 
-app.engine('handlebars', handlebars.engine({handlebars: enginehandlebars})); //Inicializamos el template engine, en este caso handlebars
-app.set("views", /*path.join(__dirname, */'./src/views'); //Configuramos la ruta de las views
+app.engine('handlebars', handlebars.engine({handlebars: enginehandlebars, defaultLayout: "main"})); //Inicializamos el template engine, en este caso handlebars
 app.set('view engine', 'handlebars');
+app.set('views', path.join(__dirname, 'views')); //Configuramos la ruta de las views
 
 
 //Middleware
