@@ -7,9 +7,10 @@ const router = Router();
 const cartManager = new CartManager(__dirname + '/data/cart.json');
 
 //Rutas
-//router.get('/', productController.getProduct)
+//router.get('/', cartController.getCarts);
+
 router.get('/', async (req,res) => {
-    try {
+    try 
         const respuesta = await cartManager.getCarts();
         res.status(200).json({
             mensaje:'Lista de Carritos Obtenida',

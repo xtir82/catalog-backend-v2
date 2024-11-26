@@ -1,5 +1,7 @@
 import {Schema,model} from "mongoose";
 
+//POR MODIFICAR
+
 const ticketSchema = new Schema({
     first_name: {type:String, required:true},
     last_name: {type:String/*, required:true*/},

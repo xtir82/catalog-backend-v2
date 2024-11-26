@@ -1,25 +1,27 @@
 import fs from 'node:fs';
-import { v4 as uuidv4 } from 'uuid';
+import { answer } from '../utils/reuse.js';
 
 class CartManager {
-cartId = 0;
 
-    constructor(path) {
+    /*constructor() {
         this.path = path;
         this.dbCart = [];
-    }
-
-    cartFactory() {
-        const newCart = { id: uuidv4(), product: [] }
-        return newCart
-    }
+    }*/
 
     //GET
-    async getCarts() {
+    async getCarts(req, res) {
+        try {
+            
+        } catch  {
+            answer(res, 500, "Error al obtener los carts");
+        }
+    }
+    
+    /*async getCarts() {
         const list = await fs.promises.readFile(this.path, 'utf-8')
         this.dbCart = [... JSON.parse(list).data]
         return [... this.dbCart]
-    }
+    }*/
 
     async getCartById(cartId) {
         await this.getCarts()
