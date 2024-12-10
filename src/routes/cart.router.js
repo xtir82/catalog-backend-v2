@@ -1,16 +1,17 @@
 import { Router } from "express";
-import CartManager from "../controller/cartManager.js";
 import { __dirname } from "../utility.js";
+import CartController from "../controller/cart.controller.js";
 
 const router = Router();
 
-const cartManager = new CartManager(__dirname + '/data/cart.json');
+const cartController = new CartController();
 
 //Rutas
-//router.get('/', cartController.getCarts);
+router.get('/', cartController.getCarts);
+router.get('/:cartId', cartController.getCartById);
 
-router.get('/', async (req,res) => {
-    try 
+/*router.get('/', async (req,res) => {
+    try {
         const respuesta = await cartManager.getCarts();
         res.status(200).json({
             mensaje:'Lista de Carritos Obtenida',
@@ -34,6 +35,7 @@ router.get('/:cartID', async (req, res) => {
         res.status(404).send('Ops! hay un problema: ' + error);
     }
 })
+*/
 
 router.post('/', async (req, res) => {
     try {

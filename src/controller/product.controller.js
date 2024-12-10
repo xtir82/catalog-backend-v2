@@ -4,7 +4,7 @@ import ProductModel from '../model/product.model.js';
 import { answer } from '../utils/reuse.js';
 import { socketServer } from '../../app.js';
 
-class ProductManager {
+class ProductController {
     //GET
     async getProduct (req, res) {
         try {
@@ -51,8 +51,8 @@ class ProductManager {
         }
     }
 
-    //UPDATE
-    async updateProduct (req, res) {
+    //PUT
+    async putProduct (req, res) {
         const {title, description, code, price, status, stock, category} = req.body
         try {
             const productToEdit = parseInt(req.params.productId);
@@ -71,7 +71,6 @@ class ProductManager {
         }
     }
 
-
     //DELETE
     async deleteProduct (req, res) {
         try {
@@ -82,6 +81,7 @@ class ProductManager {
             answer(res, 500, "Error al eliminar el producto")
         }
     }
+
 
     //RENDER
     async renderHome (req, res) {
@@ -164,4 +164,4 @@ class ProductManager {
     }*/
 }
 
-export default ProductManager;
+export default ProductController;
